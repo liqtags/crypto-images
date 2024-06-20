@@ -28385,7 +28385,7 @@ for (let key in tagsArray) {
     return `
         <div class="col-sm-4 col-6 col-lg-2">
             <div class="image">
-                <img src="/images/${imagesrc}" alt="placeholder" class="img-fluid">
+                <img src="/crypto-images/${imagesrc}" alt="placeholder" class="img-fluid">
                 <p>${name}</p>
             </div>
         </div>
@@ -28493,7 +28493,7 @@ for (let key in categoryArray) {
   return `
         <div class="col-sm-4 col-6 col-lg-2">
             <div class="image">
-                <img src="/images/${imagesrc}" alt="placeholder" class="img-fluid">
+                <img src="/crypto-images/${imagesrc}" alt="placeholder" class="img-fluid">
                 <p>${name}</p>
             </div>
         </div>
