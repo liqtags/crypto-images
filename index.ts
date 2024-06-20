@@ -16,7 +16,7 @@ const injectHeaderContainer = () => {
                 </a>
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="/crypto-images" class="nav-link active" aria-current="page">Home</a></li>
                 </ul>
             </header>
         </div> 
@@ -68,7 +68,7 @@ let seenImageNames: string[] = [];
 // let seenSlice = seenImageNames.slice(0, 100);
 
 const namePMaker = (name: string) => {
-  if (name.length > 24 && name.length < 30) {
+  if (name.length > 20 && name.length < 30) {
     return `<p style="font-size: 14px;">${name}</p>`;
   } else if (name.length > 30) {
     return `<p style="font-size: 12px;">${name}</p>`;
@@ -28306,7 +28306,7 @@ const tagsArray = {
 
 // let lowercase = type.toLowerCase();
 // fs.writeFileSync(`./images_${lowercase}.html`, html);
-let finalizedArr = []; 
+let finalizedArr = [];
 for (let key in tagsArray) {
   console.log(key);
   let type = key;
@@ -28336,6 +28336,8 @@ for (let key in tagsArray) {
         }
         .image img {
             display: block;
+            width: 100%;
+            height: 100%;
             margin: 0 auto;
         }
         .image img:hover {
@@ -28358,32 +28360,39 @@ for (let key in tagsArray) {
 <body>
     <main>
         ${injectHeaderContainer()}
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1>${type} Images</h1>
-                </div>
+  <div class="container">
+    <h1>${type} Images</h1>
+    <div class="row">
+        ${tagsArray[type].map((thing: any) => {
+    // imageName = imageName.toLowerCase().replace(/ /g, '-');
+    // put .png on the end
+    // get the key name of the object
+    let imagesrc = thing + '.png';
+    // let name = thing.name;
+    let name = thing.replace(/-/g, ' ');
+    // name = name.charAt(0).toUpperCase() + name.slice(1);
+    // if like bitcoin free cash make it Bitcoin Free Cash
+    name = name.split(' ').map((word: string) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+
+    // let unslugifyedname = imageName.replace(/-/g, ' ');
+    // let chapitalizedname = imageName.charAt(0).toUpperCase() + imageName.slice(1);
+    // return `<div class="image"><img src="./images/${imageName}" alt="${imageName}" width="200" height="200"></div>`;
+    // with slug text
+    // return `<div class="image"><img src="./images/${imagesrc}" alt="${name}" width="200" height="200">${namePMaker(name)}</div>`;
+
+    return `
+        <div class="col-sm-4 col-6 col-lg-2">
+            <div class="image">
+                <img src="/images/${imagesrc}" alt="placeholder" class="img-fluid">
+                <p>${name}</p>
             </div>
-            ${tagsArray[type].map((thing: any) => {
-              // imageName = imageName.toLowerCase().replace(/ /g, '-');
-              // put .png on the end
-              // get the key name of the object
-              let imagesrc = thing + '.png';
-              // let name = thing.name;
-              let name = thing.replace(/-/g, ' ');
-              // name = name.charAt(0).toUpperCase() + name.slice(1);
-              // if like bitcoin free cash make it Bitcoin Free Cash
-              name = name.split(' ').map((word: string) => {
-                return word.charAt(0).toUpperCase() + word.slice(1);
-              }).join(' ');
-          
-              // let unslugifyedname = imageName.replace(/-/g, ' ');
-              // let chapitalizedname = imageName.charAt(0).toUpperCase() + imageName.slice(1);
-              // return `<div class="image"><img src="./images/${imageName}" alt="${imageName}" width="200" height="200"></div>`;
-              // with slug text
-              return `<div class="image"><img src="./images/${imagesrc}" alt="${name}" width="200" height="200">${namePMaker(name)}</div>`;
-            }).join('')}
-        </div> 
+        </div>
+              `
+  }).join('')}
+    </div>
+</div>
     </main>
 </body>
 </html>
@@ -28399,7 +28408,7 @@ for (let key in tagsArray) {
 
   finalizedArr.push(`<li><a href="/images_${lowercase}.html">${key}</a></li>`);
 
-  fs.writeFileSync(`./images_${lowercase}.html`, html_new);
+  fs.writeFileSync(`./pages/images_${lowercase}.html`, html_new);
 }
 
 for (let key in categoryArray) {
@@ -28429,6 +28438,8 @@ for (let key in categoryArray) {
         }
         .image img {
             display: block;
+            height: 100%;
+            width: 100%;
             margin: 0 auto;
         }
         .image img:hover {
@@ -28451,32 +28462,45 @@ for (let key in categoryArray) {
 <body>
     <main>
         ${injectHeaderContainer()}
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1>${type} Images</h1>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>${type} Images</h1>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+                    ${categoryArray[type].map((thing: any) => {
+    // imageName = imageName.toLowerCase().replace(/ /g, '-');
+    // put .png on the end
+    // get the key name of the object
+    let imagesrc = thing + '.png';
+    // let name = thing.name;
+    let name = thing.replace(/-/g, ' ');
+    // name = name.charAt(0).toUpperCase() + name.slice(1);
+    // if like bitcoin free cash make it Bitcoin Free Cash
+    name = name.split(' ').map((word: string) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+
+    // let unslugifyedname = imageName.replace(/-/g, ' ');
+    // let chapitalizedname = imageName.charAt(0).toUpperCase() + imageName.slice(1);
+    // return `<div class="image"><img src="./images/${imageName}" alt="${imageName}" width="200" height="200"></div>`;
+    // with slug text
+  //   return `<div class="image"><img src="./images/${imagesrc}" alt="${name}" width="200" height="200">${namePMaker(name)}</div>`;
+  // }).join('')}
+  return `
+        <div class="col-sm-4 col-6 col-lg-2">
+            <div class="image">
+                <img src="/images/${imagesrc}" alt="placeholder" class="img-fluid">
+                <p>${name}</p>
             </div>
-            ${categoryArray[type].map((thing: any) => {
-              // imageName = imageName.toLowerCase().replace(/ /g, '-');
-              // put .png on the end
-              // get the key name of the object
-              let imagesrc = thing + '.png';
-              // let name = thing.name;
-              let name = thing.replace(/-/g, ' ');
-              // name = name.charAt(0).toUpperCase() + name.slice(1);
-              // if like bitcoin free cash make it Bitcoin Free Cash
-              name = name.split(' ').map((word: string) => {
-                return word.charAt(0).toUpperCase() + word.slice(1);
-              }).join(' ');
-          
-              // let unslugifyedname = imageName.replace(/-/g, ' ');
-              // let chapitalizedname = imageName.charAt(0).toUpperCase() + imageName.slice(1);
-              // return `<div class="image"><img src="./images/${imageName}" alt="${imageName}" width="200" height="200"></div>`;
-              // with slug text
-              return `<div class="image"><img src="./images/${imagesrc}" alt="${name}" width="200" height="200">${namePMaker(name)}</div>`;
-            }).join('')}
-        </div> 
+        </div>
+              `
+  }).join('')}
+        </div>
+      </div>
     </main>
 </body>
 </html>
@@ -28492,7 +28516,7 @@ for (let key in categoryArray) {
 
   // finalizedArr.push(lowercase);
 
-  fs.writeFileSync(`./images_${lowercase}.html`, html_new);
+  fs.writeFileSync(`./pages/images_${lowercase}.html`, html_new);
 }
 
 // console.log(`finished`);
