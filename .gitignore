@@ -3,3 +3,4 @@ node_modules
 _scripts
 scripts
 .jekyll-cache
+_site
