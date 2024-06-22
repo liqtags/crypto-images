@@ -1,5 +1,6 @@
 node_modules
 .env
 scripts
+_scripts
 _site
 .jekyll-cache
